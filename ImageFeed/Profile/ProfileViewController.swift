@@ -10,40 +10,66 @@ import UIKit
 final class ProfileViewController: UIViewController {
     
     
-    @IBOutlet weak var avatar: UIImageView!
-    @IBOutlet weak var buttonQuit: UIButton!
-    
-    @IBOutlet weak var labelMes: UILabel!
-    @IBOutlet weak var labelName: UILabel!
-    @IBOutlet weak var labelAccount: UILabel!
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         guard let imageAvatar = UIImage(named: "avatar") else {return}
         guard let imageButton = UIImage(named: "quit") else {return}
         
-        self.avatar.image = imageAvatar
+        let imageView = UIImageView(image: imageAvatar)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.widthAnchor.constraint(equalToConstant: 70).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: 70).isActive = true
+        view.addSubview(imageView)
         
-        self.buttonQuit.setImage(imageButton, for: .normal)
+        imageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16).isActive = true
+        imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32).isActive = true
         
-        self.labelMes.text = "Hello, world!"
-        self.labelName.text = "Екатерина Новикова"
-        self.labelAccount.text = "@ekaterina_nov"
+
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(imageButton, for: .normal)
+        view.addSubview(button)
         
-        self.labelName.font = UIFont(name: "SFProText-Bold", size: CGFloat(23))
-        self.labelMes.font = UIFont(name: "SFProText-Regular", size: CGFloat(13))
-        self.labelAccount.font = UIFont(name: "SFProText-Regular", size: CGFloat(13))
+        button.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -26).isActive = true
+        button.centerYAnchor.constraint(equalTo: imageView.centerYAnchor).isActive = true
         
-        self.labelMes.textColor = UIColor(red: CGFloat(1), green: CGFloat(1), blue: CGFloat(1), alpha: CGFloat(1))
-        self.labelName.textColor = UIColor(red: CGFloat(1), green: CGFloat(1), blue: CGFloat(1), alpha: CGFloat(1))
-        self.labelAccount.textColor = UIColor(red: CGFloat(0.68), green: CGFloat(0.69), blue: CGFloat(0.71), alpha: CGFloat(1))
         
-    }
-    
-    
-    @IBAction func quitPush(_ sender: Any) {
+        
+        let labelName = UILabel()
+        labelName.translatesAutoresizingMaskIntoConstraints = false
+        labelName.text = "Екатерина Новикова"
+        labelName.font = UIFont(name: "SFProText-Bold", size: CGFloat(23))
+        labelName.textColor = UIColor(red: CGFloat(1), green: CGFloat(1), blue: CGFloat(1), alpha: CGFloat(1))
+        view.addSubview(labelName)
+        
+        labelName.leadingAnchor.constraint(equalTo: imageView.leadingAnchor).isActive = true
+        labelName.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 8).isActive = true
+
+        
+        let labelAccount = UILabel()
+        labelAccount.translatesAutoresizingMaskIntoConstraints = false
+        labelAccount.text = "@ekaterina_nov"
+        labelAccount.font = UIFont(name: "SFProText-Regular", size: CGFloat(13))
+        labelAccount.textColor = UIColor(red: CGFloat(0.68), green: CGFloat(0.69), blue: CGFloat(0.71), alpha: CGFloat(1))
+        view.addSubview(labelAccount)
+        
+        labelAccount.leadingAnchor.constraint(equalTo: imageView.leadingAnchor).isActive = true
+        labelAccount.topAnchor.constraint(equalTo: labelName.bottomAnchor, constant: 8).isActive = true
+        
+        
+        
+        let labelMes = UILabel()
+        labelMes.translatesAutoresizingMaskIntoConstraints = false
+        labelMes.text = "Hello, world!"
+        labelMes.font = UIFont(name: "SFProText-Regular", size: CGFloat(13))
+        labelMes.textColor = UIColor(red: CGFloat(1), green: CGFloat(1), blue: CGFloat(1), alpha: CGFloat(1))
+        view.addSubview(labelMes)
+        
+        labelMes.leadingAnchor.constraint(equalTo: imageView.leadingAnchor).isActive = true
+        labelMes.topAnchor.constraint(equalTo: labelAccount.bottomAnchor, constant: 8).isActive = true
+       
+        
     }
     
 }

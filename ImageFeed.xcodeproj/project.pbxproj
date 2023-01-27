@@ -69,10 +69,10 @@
 				1469A7D629698F74007C3AB4 /* Resources */,
 				1404743029643FE800140930 /* AppDelegate.swift */,
 				1404743229643FE800140930 /* SceneDelegate.swift */,
+				1458B8D1298117BE00CBC592 /* SingleImageView */,
 				1445AD1D296B1E9C00CC472A /* Profile */,
 				1417FA092965A83A00CAC2A4 /* ImagesList */,
 				1404743629643FE800140930 /* Main.storyboard */,
-				14D7B643296B26190083B46B /* SingleImageViewController.swift */,
 				1404743929643FEA00140930 /* Assets.xcassets */,
 				1404743B29643FEA00140930 /* LaunchScreen.storyboard */,
 				1404743E29643FEA00140930 /* Info.plist */,
@@ -83,8 +83,8 @@
 		1417FA092965A83A00CAC2A4 /* ImagesList */ = {
 			isa = PBXGroup;
 			children = (
-				1404743429643FE800140930 /* ImagesListViewController.swift */,
 				1417FA0A2965AA7D00CAC2A4 /* ImagesListCell.swift */,
+				1404743429643FE800140930 /* ImagesListViewController.swift */,
 			);
 			path = ImagesList;
 			sourceTree = "<group>";
@@ -95,6 +95,14 @@
 				14B29FEF2968B30D0029CC71 /* ProfileViewController.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		1458B8D1298117BE00CBC592 /* SingleImageView */ = {
+			isa = PBXGroup;
+			children = (
+				14D7B643296B26190083B46B /* SingleImageViewController.swift */,
+			);
+			path = SingleImageView;
 			sourceTree = "<group>";
 		};
 		1469A7D629698F74007C3AB4 /* Resources */ = {
