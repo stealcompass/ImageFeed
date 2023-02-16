@@ -14,8 +14,15 @@
 		1404743A29643FEA00140930 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1404743929643FEA00140930 /* Assets.xcassets */; };
 		1404743D29643FEA00140930 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1404743B29643FEA00140930 /* LaunchScreen.storyboard */; };
 		1417FA0B2965AA7D00CAC2A4 /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1417FA0A2965AA7D00CAC2A4 /* ImagesListCell.swift */; };
+		145B4FBD299D152E00978661 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145B4FBC299D152E00978661 /* SplashViewController.swift */; };
+		145B4FBF299D1C9B00978661 /* OAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145B4FBE299D1C9B00978661 /* OAuthService.swift */; };
+		145B4FC1299D1D2D00978661 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145B4FC0299D1D2D00978661 /* Network.swift */; };
 		1469A7D82969FB6F007C3AB4 /* SF-Pro-Text-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1469A7D72969FB6F007C3AB4 /* SF-Pro-Text-Bold.otf */; };
 		1469A7DA2969FB86007C3AB4 /* SF-Pro-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1469A7D92969FB86007C3AB4 /* SF-Pro-Text-Regular.otf */; };
+		146E724D298825FA003E8690 /* Constants .swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E724C298825FA003E8690 /* Constants .swift */; };
+		146E724F298BAFD4003E8690 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E724E298BAFD4003E8690 /* AuthViewController.swift */; };
+		146E7252298BC94C003E8690 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E7251298BC94C003E8690 /* WebViewViewController.swift */; };
+		14A4CCC92995268F00B05492 /* OAuthToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A4CCC82995268F00B05492 /* OAuthToken.swift */; };
 		14B29FF02968B30D0029CC71 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B29FEF2968B30D0029CC71 /* ProfileViewController.swift */; };
 		14D7B644296B26190083B46B /* SingleImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D7B643296B26190083B46B /* SingleImageViewController.swift */; };
 /* End PBXBuildFile section */
@@ -30,8 +37,15 @@
 		1404743C29643FEA00140930 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1404743E29643FEA00140930 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1417FA0A2965AA7D00CAC2A4 /* ImagesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
+		145B4FBC299D152E00978661 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		145B4FBE299D1C9B00978661 /* OAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthService.swift; sourceTree = "<group>"; };
+		145B4FC0299D1D2D00978661 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		1469A7D72969FB6F007C3AB4 /* SF-Pro-Text-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Bold.otf"; sourceTree = "<group>"; };
 		1469A7D92969FB86007C3AB4 /* SF-Pro-Text-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Regular.otf"; sourceTree = "<group>"; };
+		146E724C298825FA003E8690 /* Constants .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Constants .swift"; sourceTree = "<group>"; };
+		146E724E298BAFD4003E8690 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
+		146E7251298BC94C003E8690 /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
+		14A4CCC82995268F00B05492 /* OAuthToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthToken.swift; sourceTree = "<group>"; };
 		14B29FEF2968B30D0029CC71 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		14D7B643296B26190083B46B /* SingleImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -69,10 +83,13 @@
 				1469A7D629698F74007C3AB4 /* Resources */,
 				1404743029643FE800140930 /* AppDelegate.swift */,
 				1404743229643FE800140930 /* SceneDelegate.swift */,
+				14A4CCC72995266800B05492 /* OAuth */,
+				146E7250298BB00A003E8690 /* Auth */,
 				1458B8D1298117BE00CBC592 /* SingleImageView */,
 				1445AD1D296B1E9C00CC472A /* Profile */,
 				1417FA092965A83A00CAC2A4 /* ImagesList */,
 				1404743629643FE800140930 /* Main.storyboard */,
+				146E724C298825FA003E8690 /* Constants .swift */,
 				1404743929643FEA00140930 /* Assets.xcassets */,
 				1404743B29643FEA00140930 /* LaunchScreen.storyboard */,
 				1404743E29643FEA00140930 /* Info.plist */,
@@ -112,6 +129,26 @@
 				1469A7D92969FB86007C3AB4 /* SF-Pro-Text-Regular.otf */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		146E7250298BB00A003E8690 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				146E724E298BAFD4003E8690 /* AuthViewController.swift */,
+				146E7251298BC94C003E8690 /* WebViewViewController.swift */,
+				145B4FBC299D152E00978661 /* SplashViewController.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		14A4CCC72995266800B05492 /* OAuth */ = {
+			isa = PBXGroup;
+			children = (
+				14A4CCC82995268F00B05492 /* OAuthToken.swift */,
+				145B4FBE299D1C9B00978661 /* OAuthService.swift */,
+				145B4FC0299D1D2D00978661 /* Network.swift */,
+			);
+			path = OAuth;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -187,12 +224,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				145B4FC1299D1D2D00978661 /* Network.swift in Sources */,
 				1404743529643FE800140930 /* ImagesListViewController.swift in Sources */,
 				1417FA0B2965AA7D00CAC2A4 /* ImagesListCell.swift in Sources */,
 				14B29FF02968B30D0029CC71 /* ProfileViewController.swift in Sources */,
+				145B4FBF299D1C9B00978661 /* OAuthService.swift in Sources */,
 				1404743129643FE800140930 /* AppDelegate.swift in Sources */,
+				146E724F298BAFD4003E8690 /* AuthViewController.swift in Sources */,
+				146E724D298825FA003E8690 /* Constants .swift in Sources */,
 				14D7B644296B26190083B46B /* SingleImageViewController.swift in Sources */,
+				14A4CCC92995268F00B05492 /* OAuthToken.swift in Sources */,
+				146E7252298BC94C003E8690 /* WebViewViewController.swift in Sources */,
 				1404743329643FE800140930 /* SceneDelegate.swift in Sources */,
+				145B4FBD299D152E00978661 /* SplashViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
