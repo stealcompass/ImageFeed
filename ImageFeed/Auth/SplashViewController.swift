@@ -25,16 +25,14 @@ final class SplashViewController: UIViewController {
     }
     
     private func switchToTabBarController() {
-        // Получаем экземпляр `Window` приложения
+
         guard let window = UIApplication.shared.windows.first else {
             fatalError("Invalid Configuration")
         }
         
-        // Cоздаём экземпляр нужного контроллера из Storyboard с помощью ранее заданного идентификатора.
         let tabBarController = UIStoryboard(name: "Main", bundle: .main)
             .instantiateViewController(withIdentifier: "TabBarViewController")
-           
-        // Установим в `rootViewController` полученный контроллер
+        
         window.rootViewController = tabBarController
     } 
     
@@ -45,10 +43,9 @@ final class SplashViewController: UIViewController {
 extension SplashViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Проверим, что переходим на авторизацию
+
         if segue.identifier == ShowAuthenticationScreenSegueIdentifier {
             
-            // Доберёмся до первого контроллера в навигации. Мы помним, что в программировании отсчёт начинается с 0?
             guard
                 let navigationController = segue.destination as? UINavigationController,
                 let viewController = navigationController.viewControllers[0] as? AuthViewController
@@ -56,7 +53,6 @@ extension SplashViewController {
                 fatalError("Failed to prepare for \(ShowAuthenticationScreenSegueIdentifier)")
             }
             
-            // Установим делегатом контроллера наш SplashViewController
             viewController.delegate = self
         } else {
             super.prepare(for: segue, sender: sender)
@@ -68,7 +64,19 @@ extension SplashViewController {
 extension SplashViewController: AuthViewControllerDelegate {
     
     func authViewController(_ vc: AuthViewController, didAuthenticateWithCode code: String) {
-        self.switchToTabBarController()
+        
+        oauth2Service.fetchAuthToken(code) {[weak self] result in
+            guard let self=self else {return}
+            
+            switch result {
+            case .success(let authToken):
+                OAuth2TokenStorage().token = authToken
+                print("CODE: \(authToken)")
+                self.switchToTabBarController()
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }
 

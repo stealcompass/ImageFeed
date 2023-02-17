@@ -18,9 +18,15 @@ protocol WebViewViewControllerDelegate: AnyObject {
 
 final class WebViewViewController: UIViewController{
     
+    var delegate: WebViewViewControllerDelegate?
+    
+    @IBOutlet private var webView: WKWebView!
+    
+    @IBOutlet private var progressView: UIProgressView!
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //print("viewWillAppear")
         webView.addObserver(self,
                             forKeyPath: #keyPath(WKWebView.estimatedProgress),
                             options: .new,
@@ -29,18 +35,12 @@ final class WebViewViewController: UIViewController{
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        //print("viewWillDisappear")
-        
+
         webView.removeObserver(self,
                                forKeyPath: #keyPath(WKWebView.estimatedProgress),
                                context: nil)
     }
-
     
-    @IBOutlet private var webView: WKWebView!
-    
-    
-    @IBOutlet private var progressView: UIProgressView!
     
     override func observeValue(
         forKeyPath keyPath: String?,
@@ -55,15 +55,6 @@ final class WebViewViewController: UIViewController{
         }
     }
 
-    private func updateProgress() {
-        progressView.progress = Float(webView.estimatedProgress)
-        progressView.isHidden = fabs(webView.estimatedProgress - 1.0) <= 0.0001
-    }
-    
-    
-    
-    var delegate: WebViewViewControllerDelegate?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -80,6 +71,10 @@ final class WebViewViewController: UIViewController{
         delegate?.webViewViewControllerDidCancel(self)
     }
     
+    private func updateProgress() {
+        progressView.setProgress(Float(webView.estimatedProgress), animated: true)
+        progressView.isHidden = fabs(webView.estimatedProgress - 1.0) <= 0.0001
+    }
     
     
     private func code(from navigationAction: WKNavigationAction) -> String? {
@@ -92,7 +87,6 @@ final class WebViewViewController: UIViewController{
         {
             return codeItem.value
         } else {
-            //print("FALSE")
             return nil
         }
     }
@@ -103,11 +97,9 @@ extension WebViewViewController: WKNavigationDelegate {
                  decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         
         if let code = code(from: navigationAction){
-            //print("CODE: \(code)")
             delegate?.webViewViewController(self, didAuthenticateWithCode: code)
             decisionHandler(.cancel)
         } else {
-            //print("NOCODE")
             decisionHandler(.allow)
         }
     }
@@ -121,10 +113,10 @@ extension WebViewViewController{
         var urlComponents = URLComponents(string: UnsplashAuthorizeURLString)
         
         urlComponents?.queryItems = [
-           URLQueryItem(name: "client_id", value: AccessKey),
-           URLQueryItem(name: "redirect_uri", value: RedirectURI),
+           URLQueryItem(name: "client_id", value: accessKey),
+           URLQueryItem(name: "redirect_uri", value: redirectURI),
            URLQueryItem(name: "response_type", value: "code"),
-           URLQueryItem(name: "scope", value: AccessScope)
+           URLQueryItem(name: "scope", value: accessScope)
          ]
         
         if let url = urlComponents?.url {

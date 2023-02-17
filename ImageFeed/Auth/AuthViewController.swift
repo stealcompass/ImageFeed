@@ -14,10 +14,9 @@ protocol AuthViewControllerDelegate: AnyObject {
 
 final class AuthViewController: UIViewController, WebViewViewControllerDelegate {
 
-    private let idWebView = "ShowWebView"
-    private var oAuth2Service =  OAuth2Service()
-    
     weak var delegate: AuthViewControllerDelegate?
+    
+    private let idWebView = "ShowWebView"
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
         if segue.identifier == idWebView {
@@ -37,9 +36,9 @@ extension AuthViewController {
     
     func authTokenRequest(code: String) -> URLRequest {
         return URLRequest.makeHTTPRequest(path: "/oauth/token"
-            + "?client_id=\(AccessKey)"
-            + "&&client_secret=\(SecretKey)"
-            + "&&redirect_uri=\(RedirectURI)"
+            + "?client_id=\(accessKey)"
+            + "&&client_secret=\(secretKey)"
+            + "&&redirect_uri=\(redirectURI)"
             + "&&code=\(code)"
             + "&&grant_type=authorization_code",
             httpMethod: "POST",
@@ -49,18 +48,6 @@ extension AuthViewController {
     
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String){
         delegate?.authViewController(self, didAuthenticateWithCode: code)
-        
-        oAuth2Service.fetchAuthToken(code) { result in
-            
-            switch result {
-            case .success(let authToken):
-                OAuth2TokenStorage().token = authToken
-                print("CODE: \(authToken)")
-                //var token = authToken
-            case .failure(let error):
-                print(error)
-            }
-        }
     }
     
     func webViewViewControllerDidCancel(_ vc: WebViewViewController) {
@@ -71,7 +58,7 @@ extension AuthViewController {
 
 
 extension URLRequest {
-    static func makeHTTPRequest(path: String, httpMethod: String, baseURL: URL = DefaultBaseURL) -> URLRequest {
+    static func makeHTTPRequest(path: String, httpMethod: String, baseURL: URL = defaultBaseURL) -> URLRequest {
         var request = URLRequest(url: URL(string: path, relativeTo: baseURL)!)
         request.httpMethod = httpMethod
         return request

@@ -31,6 +31,7 @@
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VfI-re-0pe">
                                                     <rect key="frame" x="16" y="4" width="343" height="124"/>
+                                                    <color key="backgroundColor" name="backGroundCol"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                             <integer key="value" value="16"/>
@@ -54,6 +55,7 @@
                                                     <state key="normal" image="whitelike"/>
                                                 </button>
                                             </subviews>
+                                            <color key="backgroundColor" name="backGroundCol"/>
                                             <constraints>
                                                 <constraint firstItem="VfI-re-0pe" firstAttribute="leading" secondItem="kQS-gN-rXe" secondAttribute="leading" constant="16" id="508-th-CAi"/>
                                                 <constraint firstAttribute="bottom" secondItem="AYH-1J-xQv" secondAttribute="bottom" constant="8" id="HJ9-In-5nj"/>
