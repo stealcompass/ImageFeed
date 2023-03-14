@@ -6,19 +6,45 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class ProfileViewController: UIViewController {
     
+    private let profileService = ProfileService.shared
+
+    private var nameLabel: String?
+    private var loginNameLabel: String?
+    private var descriptionLabel: String?
+    
+    private var imageView = UIImageView()
+    
+    private var profileImageServiceObserver: NSObjectProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.backgroundColor = UIColor(named: "backGroundCol")
+    
+        profileImageServiceObserver = NotificationCenter.default
+            .addObserver(forName: ProfileImageService.DidChangeNotification,
+                         object: nil,
+                         queue: .main,
+                         using: { [weak self] _ in
+                guard let self = self else {return}
+                
+                self.updateAvatar()
+            })
+        
+        updateAvatar()
+        
+        guard let profile = profileService.profile else {return}
+        
+        updateProfileDetails(profile: profile)
+        
         guard
-            let imageAvatar = UIImage(named: "avatar"),
             let imageButton = UIImage(named: "quit")
         else {return}
         
-        let imageView = UIImageView(image: imageAvatar)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(imageView)
         
@@ -31,7 +57,7 @@ final class ProfileViewController: UIViewController {
         
         let nameLabel = UILabel()
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        nameLabel.text = "Екатерина Новикова"
+        nameLabel.text = self.nameLabel ?? "" //"Екатерина Новикова"
         nameLabel.font = UIFont(name: "SFProText-Bold", size: CGFloat(23))
         nameLabel.textColor = UIColor(red: CGFloat(1), green: CGFloat(1), blue: CGFloat(1), alpha: CGFloat(1))
         view.addSubview(nameLabel)
@@ -39,7 +65,7 @@ final class ProfileViewController: UIViewController {
         
         let accountLabel = UILabel()
         accountLabel.translatesAutoresizingMaskIntoConstraints = false
-        accountLabel.text = "@ekaterina_nov"
+        accountLabel.text = self.loginNameLabel ?? "" //"@ekaterina_nov"
         accountLabel.font = UIFont(name: "SFProText-Regular", size: CGFloat(13))
         accountLabel.textColor = UIColor(red: CGFloat(0.68), green: CGFloat(0.69), blue: CGFloat(0.71), alpha: CGFloat(1))
         view.addSubview(accountLabel)
@@ -47,13 +73,14 @@ final class ProfileViewController: UIViewController {
         
         let mesLabel = UILabel()
         mesLabel.translatesAutoresizingMaskIntoConstraints = false
-        mesLabel.text = "Hello, world!"
+        mesLabel.text = self.descriptionLabel ?? "" //"Hello, world!"
         mesLabel.font = UIFont(name: "SFProText-Regular", size: CGFloat(13))
         mesLabel.textColor = UIColor(red: CGFloat(1), green: CGFloat(1), blue: CGFloat(1), alpha: CGFloat(1))
         view.addSubview(mesLabel)
         
         
         NSLayoutConstraint.activate([
+            
             imageView.widthAnchor.constraint(equalToConstant: 70),
             imageView.heightAnchor.constraint(equalToConstant: 70),
             
@@ -72,6 +99,29 @@ final class ProfileViewController: UIViewController {
             mesLabel.leadingAnchor.constraint(equalTo: imageView.leadingAnchor),
             mesLabel.topAnchor.constraint(equalTo: accountLabel.bottomAnchor, constant: 8)
             ])
+        
+    }
+    
+    
+    private func updateProfileDetails(profile: Profile){
+        
+        self.loginNameLabel = profile.loginName
+        self.descriptionLabel = profile.bio
+        self.nameLabel = profile.name
+        
+    }
+    
+    private func updateAvatar(){
+        guard
+            let profileImageURL = ProfileImageService.shared.avatarURL,
+            let url = URL(string: profileImageURL)
+        else {return}
+        
+        //..Update avatar
+        let processor = RoundCornerImageProcessor(cornerRadius: 61)
+        self.imageView.kf.setImage(with: url,
+                                   placeholder: UIImage(named: "person_placeholder.png"),
+                                   options: [.processor(processor)])
         
     }
     
